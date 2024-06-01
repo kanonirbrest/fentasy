@@ -63,7 +63,7 @@ export default function Tournament() {
   React.useEffect(() => {
     setSquad(tournament?.team?.members || []);
     setPlayers(tournament?.players);
-    console.log(tournament);
+
     setBalance(
       tournament?.startBalance -
         tournament?.team?.members.reduce((acc, val) => {

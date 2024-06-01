@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import { AXIOS_TIMEOUT } from "@/api/constant.js";
+import { authClient } from "@/lib/auth/client.js";
 import { login } from "@/molules/auth/api.js";
 import { getToken, TOKEN_TYPE } from "@/utils/auth.js";
 // import { _useAuth } from "@/modules/Auth/stores/auth-store.js";
@@ -33,6 +34,10 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   async (error) => {
+    if (error.response.status === 401) {
+      await authClient.signOut();
+    }
+
     return Promise.reject(error);
   },
 );
