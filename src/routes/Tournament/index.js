@@ -16,7 +16,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { Filter } from "@/components/filter/filter.js";
 import { PlayerCard } from "@/components/player-card/index.js";
 import { TableComponent } from "@/components/table/table.js";
-import { createTeam } from "@/molules/teams/api.js";
+import { createTeam, updateTeam } from "@/molules/teams/api.js";
 import { useTournament } from "@/molules/tournament/store.js";
 import { TABLE_CONFIG } from "@/routes/Tournament/config.js";
 import { PATHS } from "@/utils/paths.js";
@@ -79,17 +79,30 @@ export default function Tournament() {
   }, [tournament?.id]);
   const squadIds = squad.map((s) => s?.nickname);
   const onSubmitTeam = async () => {
-    await createTeam({
-      name: name,
-      members: squad.map((s) => s.nickname),
-      captain: squad[0].nickname,
-      tournamentId: tournament?.id,
-    });
+    if (tournament?.team?.id) {
+      await updateTeam({
+        name: name,
+        members: squad.map((s) => s.nickname),
+        captain: squad[0].nickname,
+        id: tournament?.team?.id,
+      });
+    } else {
+      await createTeam({
+        name: name,
+        members: squad.map((s) => s.nickname),
+        captain: squad[0].nickname,
+        tournamentId: tournament?.id,
+      });
+    }
+
     navigate(PATHS.teams);
   };
-
+  const isEditMode = !!tournament?.team?.id;
   const isValid =
-    !!name && squad?.length === tournament?.teamMembersCount && balance >= 0;
+    !!name &&
+    squad?.length === tournament?.teamMembersCount &&
+    balance >= 0 &&
+    (isEditMode ? tournament?.team?.id : true);
 
   return (
     <Stack spacing={3}>
@@ -133,7 +146,7 @@ export default function Tournament() {
                 {squad.map((p) => {
                   return (
                     <PlayerCard
-                      key={p.id}
+                      key={p.nickname}
                       player={{ ...p, price: priceMap[p?.nickname] }}
                     />
                   );
@@ -164,6 +177,7 @@ export default function Tournament() {
             <TableComponent
               count={players?.length}
               page={page}
+              keyField="nickname"
               rows={players
                 .filter((p) => {
                   return !squadIds.includes(p?.nickname);

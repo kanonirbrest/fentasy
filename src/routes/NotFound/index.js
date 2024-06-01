@@ -1,4 +1,3 @@
-import * as React from "react";
 import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -32,23 +31,22 @@ export default function NotFound() {
           }}
         />
         <Typography variant="h3" sx={{ textAlign: "center" }}>
-          404: The page you are looking for isn&apos;t here
+          404: Страница не найдена
         </Typography>
         <Typography
           color="text.secondary"
           variant="body1"
           sx={{ textAlign: "center" }}
         >
-          You either tried some shady route or you came here by mistake.
-          Whichever it is, try using the navigation
+          что-то пошло не так, мы уже разбираемся
         </Typography>
         <Button
           component={Link}
-          to={PATHS.admin.tournaments}
+          to={PATHS.home}
           startIcon={<ArrowLeftIcon fontSize="var(--icon-fontSize-md)" />}
           variant="contained"
         >
-          Go back to home
+          Вернуться на домашнюю страницу
         </Button>
       </Stack>
     </Box>

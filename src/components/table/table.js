@@ -12,6 +12,7 @@ import Typography from "@mui/material/Typography";
 export function TableComponent({
   rows = [],
   config,
+  keyField,
   onRowClick = () => {},
   actionCallback = () => {},
   isRowDisabled = () => {
@@ -43,8 +44,7 @@ export function TableComponent({
                     opacity: idDisabled ? ".5" : "1",
                   }}
                   hover
-                  key={row.id}
-                  isRowSelectable={idDisabled}
+                  key={row[keyField]}
                 >
                   {config.map((config) => {
                     return (

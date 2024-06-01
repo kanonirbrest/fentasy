@@ -26,11 +26,15 @@ export default function RoutesView() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-        <Route path="/auth" element={<AuthLayout />}>
+        <Route
+          path="/auth"
+          element={<AuthLayout />}
+          errorElement={<NotFound />}
+        >
           <Route path={PATHS.auth.signIn} element={<SignInForm />} />
           <Route path={PATHS.auth.signUp} element={<SignUpForm />} />
         </Route>
-        <Route element={<Layout />} path="/">
+        <Route element={<Layout />} path="/" errorElement={<NotFound />}>
           <Route path="/admin">
             <Route path={PATHS.admin.tournaments} element={<Tournaments />} />
             <Route
@@ -38,8 +42,16 @@ export default function RoutesView() {
               element={<TournamentAdd />}
             />
           </Route>
-          <Route path={PATHS.tournaments} element={<UserTournaments />} />
-          <Route path={PATHS.teams} element={<Teams />} />
+          <Route
+            path={PATHS.tournaments}
+            element={<UserTournaments />}
+            errorElement={<NotFound />}
+          />
+          <Route
+            path={PATHS.teams}
+            element={<Teams />}
+            errorElement={<NotFound />}
+          />
           <Route
             path={PATHS.tournament}
             loader={async ({ request }) => {
@@ -56,9 +68,19 @@ export default function RoutesView() {
               return null;
             }}
             element={<Tournament />}
+            errorElement={<NotFound />}
           />
-          <Route path={PATHS.home} element={<Navigate to={PATHS.account} />} />
-          <Route path={PATHS.account} element={<Account />} />
+          <Route
+            path={PATHS.home}
+            element={
+              <Navigate to={PATHS.account} errorElement={<NotFound />} />
+            }
+          />
+          <Route
+            path={PATHS.account}
+            element={<Account />}
+            errorElement={<NotFound />}
+          />
           <Route path="*" element={<NotFound />} />
         </Route>
       </>,
