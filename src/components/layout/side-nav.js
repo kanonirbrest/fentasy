@@ -1,5 +1,3 @@
-"use client";
-
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";

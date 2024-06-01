@@ -1,5 +1,3 @@
-"use client";
-
 import { login } from "@/molules/auth/api.js";
 import { ROLE } from "@/utils/constant.js";
 

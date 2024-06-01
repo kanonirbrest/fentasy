@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 
 import { authClient } from "@/lib/auth/client.js";
