@@ -41,5 +41,4 @@ export default defineConfig({
   build: {
     sourcemap: false,
   },
-  base: "/fentasy/",
 });
