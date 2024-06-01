@@ -83,14 +83,20 @@ export default function Tournament() {
       await updateTeam({
         name: name,
         members: squad.map((s) => s.nickname),
-        captain: squad[0].nickname,
+        captain:
+          squad.find((pl) => {
+            return !!pl.isCaptain;
+          })?.nickname || squad[0].nickname,
         id: tournament?.team?.id,
       });
     } else {
       await createTeam({
         name: name,
         members: squad.map((s) => s.nickname),
-        captain: squad[0].nickname,
+        captain:
+          squad.find((pl) => {
+            return !!pl.isCaptain;
+          })?.nickname || squad[0].nickname,
         tournamentId: tournament?.id,
       });
     }
