@@ -33,7 +33,7 @@ export function PlayerCard({ player: { nickname, price } }) {
                     {nickname}
                   </Typography>
                 </Stack>
-                <Typography variant="h6">price: {price}</Typography>
+                <Typography variant="h6">цена: {price}</Typography>
               </Stack>
               <Stack spacing={1} direction="row">
                 <IconButton
@@ -49,7 +49,7 @@ export function PlayerCard({ player: { nickname, price } }) {
           </Stack>
           <Stack sx={{ alignItems: "center" }} direction="row" spacing={2}>
             <Typography color="text.secondary" variant="caption">
-              selected by 21
+              в команде у 21% участников
             </Typography>
           </Stack>
         </CardContent>

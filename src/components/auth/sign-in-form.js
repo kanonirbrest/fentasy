@@ -66,11 +66,11 @@ export function SignInForm() {
   return (
     <Stack spacing={4}>
       <Stack spacing={1}>
-        <Typography variant="h4">Sign in</Typography>
+        <Typography variant="h4">Войти</Typography>
         <Typography color="text.secondary" variant="body2">
-          Don&apos;t have an account?{" "}
+          Нету аккаунта?{" "}
           <Link to={PATHS.auth.signUp} underline="hover" variant="subtitle2">
-            Sign up
+            Регистрация
           </Link>
         </Typography>
       </Stack>
@@ -81,8 +81,12 @@ export function SignInForm() {
             name="email"
             render={({ field }) => (
               <FormControl error={Boolean(errors.email)}>
-                <InputLabel>Email address</InputLabel>
-                <OutlinedInput {...field} label="Email address" type="email" />
+                <InputLabel>Логин или почта</InputLabel>
+                <OutlinedInput
+                  {...field}
+                  label="Логин или почта"
+                  type="email"
+                />
                 {errors.email ? (
                   <FormHelperText>{errors.email.message}</FormHelperText>
                 ) : null}
@@ -94,7 +98,7 @@ export function SignInForm() {
             name="password"
             render={({ field }) => (
               <FormControl error={Boolean(errors.password)}>
-                <InputLabel>Password</InputLabel>
+                <InputLabel>Пароль</InputLabel>
                 <OutlinedInput
                   {...field}
                   endAdornment={
@@ -116,7 +120,7 @@ export function SignInForm() {
                       />
                     )
                   }
-                  label="Password"
+                  label="Пароль"
                   type={showPassword ? "text" : "password"}
                 />
                 {errors.password ? (
@@ -127,27 +131,17 @@ export function SignInForm() {
           />
           <div>
             <Link to={PATHS.auth.resetPassword} variant="subtitle2">
-              Forgot password?
+              Забыли пароль?
             </Link>
           </div>
           {errors.root ? (
             <Alert color="error">{errors.root.message}</Alert>
           ) : null}
           <Button disabled={isPending} type="submit" variant="contained">
-            Sign in
+            Вход
           </Button>
         </Stack>
       </form>
-      <Alert color="warning">
-        Use{" "}
-        <Typography component="span" sx={{ fontWeight: 700 }} variant="inherit">
-          sofia@devias.io
-        </Typography>{" "}
-        with password{" "}
-        <Typography component="span" sx={{ fontWeight: 700 }} variant="inherit">
-          Secret1
-        </Typography>
-      </Alert>
     </Stack>
   );
 }
