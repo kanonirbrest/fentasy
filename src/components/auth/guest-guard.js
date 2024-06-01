@@ -4,6 +4,7 @@ import Alert from "@mui/material/Alert";
 
 import { useUser } from "@/hooks/use-user.js";
 import { logger } from "@/lib/default-logger.js";
+import { ROLE } from "@/utils/constant.js";
 import { PATHS } from "@/utils/paths.js";
 
 export function GuestGuard({ children }) {
@@ -25,7 +26,11 @@ export function GuestGuard({ children }) {
       logger.debug(
         "[GuestGuard]: User is logged in, redirecting to tournaments",
       );
-      navigate(PATHS.admin.tournaments);
+      if (user?.role === ROLE.ADMIN) {
+        navigate(PATHS.admin.tournaments);
+      } else {
+        navigate(PATHS.tournaments);
+      }
       return;
     }
 

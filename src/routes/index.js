@@ -11,12 +11,10 @@ import { SignUpForm } from "@/components/auth/sign-up-form.js";
 import { UserProvider } from "@/contexts/user-context.js";
 import { AuthLayout } from "@/layouts/auth-layout.js";
 import { Layout } from "@/layouts/dashboard-layout.js";
-import { getTeamById } from "@/molules/teams/api.js";
-import { getByIdAdmin } from "@/molules/tournament/api.js";
+import { getTournamentById } from "@/molules/tournament/api.js";
 import Account from "@/routes/Account/index.js";
 import { TournamentAdd } from "@/routes/Admin/Tournaments/Add/index.js";
 import NotFound from "@/routes/NotFound/index.js";
-import Team from "@/routes/Team/index.js";
 import Teams from "@/routes/Teams/index.js";
 import { PATHS } from "@/utils/paths.js";
 
@@ -49,7 +47,7 @@ export default function RoutesView() {
               try {
                 if (id) {
                   // eslint-disable-next-line testing-library/no-await-sync-queries
-                  const response = await getByIdAdmin(id);
+                  const response = await getTournamentById(id);
                   return response?.data;
                 }
               } catch (e) {
@@ -58,23 +56,6 @@ export default function RoutesView() {
               return null;
             }}
             element={<Tournament />}
-          />
-          <Route
-            path={PATHS.team}
-            loader={async ({ request }) => {
-              const id = new URL(request.url).pathname.split("/").pop();
-              try {
-                if (id) {
-                  // eslint-disable-next-line testing-library/no-await-sync-queries
-                  const response = await getTeamById(id);
-                  return response?.data;
-                }
-              } catch (e) {
-                return null;
-              }
-              return null;
-            }}
-            element={<Team />}
           />
           <Route path={PATHS.home} element={<Navigate to={PATHS.account} />} />
           <Route path={PATHS.account} element={<Account />} />

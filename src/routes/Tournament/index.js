@@ -52,10 +52,26 @@ export default function Tournament() {
     state.name,
     state.setName,
   ]);
+  const priceMap = React.useMemo(() => {
+    const map = {};
+    players.forEach(({ nickname, price }) => {
+      map[nickname] = price;
+    });
+    return map;
+  });
 
   React.useEffect(() => {
+    setSquad(tournament?.team?.members || []);
     setPlayers(tournament?.players);
-    setBalance(tournament?.startBalance);
+
+    setBalance(
+      tournament?.startBalance -
+        tournament?.team?.members.reduce((acc, val) => {
+          return acc + priceMap[val?.nickname];
+        }, 0),
+    );
+    setPlayers(tournament?.players);
+    setName(tournament?.team?.name);
   }, [tournament?.id]);
   const squadIds = squad.map((s) => s?.nickname);
   const onSubmitTeam = async () => {
@@ -110,7 +126,12 @@ export default function Tournament() {
             <CardContent>
               <Grid container spacing={2} wrap="wrap">
                 {squad.map((p) => {
-                  return <PlayerCard key={p.id} player={p} />;
+                  return (
+                    <PlayerCard
+                      key={p.id}
+                      player={{ ...p, price: priceMap[p?.nickname] }}
+                    />
+                  );
                 })}
               </Grid>
             </CardContent>
@@ -146,12 +167,12 @@ export default function Tournament() {
                   p.nickname.toLowerCase().includes(filter.toLowerCase()),
                 )}
               isRowDisabled={(row) => {
-                return row?.price > balance;
+                return priceMap[row?.nickname] > balance;
               }}
               rowsPerPage={rowsPerPage}
               onRowClick={(row) => {
                 setSquad([...squad, row]);
-                setBalance(balance - +row?.price);
+                setBalance(balance - priceMap[row?.nickname]);
               }}
               config={TABLE_CONFIG}
             />

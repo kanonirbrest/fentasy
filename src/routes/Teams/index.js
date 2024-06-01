@@ -48,7 +48,7 @@ export default function Teams() {
         rowsPerPage={rowsPerPage}
         config={TABLE_CONFIG}
         onRowClick={(row) => {
-          navigate(`${PATHS.teams}/${row?.id}`);
+          navigate(`${PATHS.tournaments}/${row?.tournamentId}`);
         }}
       />
     </Stack>
