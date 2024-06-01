@@ -8,7 +8,7 @@ const initialState = {
   name: "",
 };
 
-export const useTournament = create((set, get) => ({
+export const useTournament = create((set) => ({
   ...initialState,
   setSquad: (squad) => {
     set({
@@ -33,6 +33,11 @@ export const useTournament = create((set, get) => ({
   setName: (name) => {
     set({
       name,
+    });
+  },
+  reset: () => {
+    set({
+      ...initialState,
     });
   },
 }));

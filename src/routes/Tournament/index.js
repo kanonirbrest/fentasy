@@ -40,6 +40,7 @@ export default function Tournament() {
     setSquad,
     name,
     setName,
+    reset,
   ] = useTournament((state) => [
     state.squad,
     state.balance,
@@ -51,27 +52,30 @@ export default function Tournament() {
     state.setSquad,
     state.name,
     state.setName,
+    state.reset,
   ]);
   const priceMap = React.useMemo(() => {
     const map = {};
-    players.forEach(({ nickname, price }) => {
+    tournament?.players?.forEach(({ nickname, price }) => {
       map[nickname] = price;
     });
     return map;
-  });
+  }, [tournament?.players]);
 
   React.useEffect(() => {
     setSquad(tournament?.team?.members || []);
-    setPlayers(tournament?.players);
 
     setBalance(
       tournament?.startBalance -
-        tournament?.team?.members.reduce((acc, val) => {
+        (tournament?.team?.members.reduce((acc, val) => {
           return acc + (priceMap[val?.nickname] || 0);
-        }, 0),
+        }, 0) || 0),
     );
-    setPlayers(tournament?.players);
+    setPlayers(tournament?.players || []);
     setName(tournament?.team?.name);
+    return () => {
+      reset();
+    };
   }, [tournament?.id]);
   const squadIds = squad.map((s) => s?.nickname);
   const onSubmitTeam = async () => {
@@ -86,6 +90,7 @@ export default function Tournament() {
 
   const isValid =
     !!name && squad?.length === tournament?.teamMembersCount && balance >= 0;
+
   return (
     <Stack spacing={3}>
       <Stack direction="row" spacing={3}>
@@ -96,7 +101,7 @@ export default function Tournament() {
               <InputLabel>Название команды</InputLabel>
               <OutlinedInput
                 label="Название команды"
-                name="team_name"
+                name="name"
                 value={name}
                 onChange={(e) => {
                   setName(e.target.value);
@@ -167,7 +172,10 @@ export default function Tournament() {
                   p.nickname.toLowerCase().includes(filter.toLowerCase()),
                 )}
               isRowDisabled={(row) => {
-                return priceMap[row?.nickname] > balance;
+                return (
+                  priceMap[row?.nickname] > balance ||
+                  squad?.length >= tournament?.teamMembersCount
+                );
               }}
               rowsPerPage={rowsPerPage}
               onRowClick={(row) => {
