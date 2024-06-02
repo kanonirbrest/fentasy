@@ -1,4 +1,3 @@
-import Alert from "@mui/material/Alert";
 import Avatar from "@mui/material/Avatar";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -87,9 +86,6 @@ export function PlayerCard({ player: { nickname, price, isCaptain } }) {
                 в команде у 21% участников
               </Typography>
             </Stack>
-            {isCaptain && (
-              <Alert severity="info">Баллы капитана удваиваются.</Alert>
-            )}
           </Stack>
         </CardContent>
       </Card>

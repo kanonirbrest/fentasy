@@ -1,5 +1,6 @@
 import React from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
+import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -104,12 +105,14 @@ export default function Tournament() {
     navigate(PATHS.teams);
   };
   const isEditMode = !!tournament?.team?.id;
+  const hasCaptain = squad?.find((s) => s?.isCaptain);
+
   const isValid =
+    hasCaptain &&
     !!name &&
     squad?.length === tournament?.teamMembersCount &&
     balance >= 0 &&
     (isEditMode ? tournament?.team?.id : true);
-
   return (
     <Stack spacing={3}>
       <Stack direction="row" spacing={3}>
@@ -160,11 +163,18 @@ export default function Tournament() {
               </Grid>
             </CardContent>
             <Divider />
-            <CardActions sx={{ justifyContent: "flex-end" }}>
+            <CardActions>
+              {!hasCaptain && (
+                <Alert severity="info">
+                  Выберите капитана нажав на <b>CC</b>, Баллы капитана
+                  удваиваются.
+                </Alert>
+              )}
               <Button
                 disabled={!isValid}
                 onClick={onSubmitTeam}
                 variant="contained"
+                style={{ marginLeft: "auto" }}
               >
                 Сохранить
               </Button>
