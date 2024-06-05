@@ -51,6 +51,11 @@ export default function Tournaments() {
         actionCallback={async () => {
           await fetch();
         }}
+        onRowClick={(row) => {
+          if (row?.isActive) {
+            navigate(`${PATHS.admin.tournaments}/${row?.id}`);
+          }
+        }}
       />
     </Stack>
   );

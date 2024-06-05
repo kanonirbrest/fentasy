@@ -8,6 +8,7 @@ export const PATHS = {
   admin: {
     tournaments: "/admin/tournaments",
     tournamentAdd: "/admin/tournaments/add",
+    tournament: "/admin/tournaments/:id",
   },
   tournaments: "/tournaments",
   tournament: "/tournaments/:id",

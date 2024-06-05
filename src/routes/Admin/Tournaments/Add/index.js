@@ -76,6 +76,7 @@ export function TournamentAdd() {
       setIsPending(false);
     }
   };
+
   return (
     <Stack spacing={4}>
       <Stack spacing={1}>

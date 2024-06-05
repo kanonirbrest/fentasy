@@ -18,6 +18,7 @@ import NotFound from "@/routes/NotFound/index.js";
 import Teams from "@/routes/Teams/index.js";
 import { PATHS } from "@/utils/paths.js";
 
+import AdminTournament from "./Admin/Tournament/index.js";
 import Tournaments from "./Admin/Tournaments/index.js";
 import Tournament from "./Tournament/index.js";
 import UserTournaments from "./Tournaments/index.js";
@@ -40,6 +41,23 @@ export default function RoutesView() {
             <Route
               path={PATHS.admin.tournamentAdd}
               element={<TournamentAdd />}
+            />
+            <Route
+              path={PATHS.admin.tournament}
+              element={<AdminTournament />}
+              loader={async ({ request }) => {
+                const id = new URL(request.url).pathname.split("/").pop();
+                try {
+                  if (id) {
+                    // eslint-disable-next-line testing-library/no-await-sync-queries
+                    const response = await getTournamentById(id);
+                    return response?.data;
+                  }
+                } catch (e) {
+                  return null;
+                }
+                return null;
+              }}
             />
           </Route>
           <Route

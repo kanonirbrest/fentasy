@@ -7,3 +7,5 @@ export const activateTournament = (body) =>
   httpService.put(`${ROUTE_ADMIN}/activate`, body);
 export const deleteTournament = (id) =>
   httpService.delete(`${ROUTE_ADMIN}/${id}`);
+export const setGameResult = (body) =>
+  httpService.post(`admin/games/result`, body);

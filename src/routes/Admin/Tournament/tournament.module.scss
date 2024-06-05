@@ -1,0 +1,11 @@
+.container {
+  //display: flex;
+  //justify-content: space-between;
+  //flex: 1;
+  display: inline-block;
+}
+.players {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
