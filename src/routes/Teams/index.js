@@ -50,6 +50,7 @@ export default function Teams() {
         onRowClick={(row) => {
           navigate(`${PATHS.tournaments}/${row?.tournamentId}`);
         }}
+        keyField="id"
       />
     </Stack>
   );

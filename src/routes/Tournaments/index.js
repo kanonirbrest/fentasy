@@ -37,7 +37,7 @@ export default function Tournaments() {
               variant="contained"
               onClick={onAdd}
             >
-              Добавить
+              Добавить команду
             </Button>
           </div>
         </Stack>
@@ -51,6 +51,7 @@ export default function Tournaments() {
         onRowClick={(row) => {
           navigate(`${PATHS.tournaments}/${row?.id}`);
         }}
+        keyField="id"
       />
     </Stack>
   );

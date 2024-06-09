@@ -9,7 +9,7 @@ export const navItems = [
     roles: [ROLE.ADMIN],
   },
   {
-    key: "турниры",
+    key: "мои турниры",
     title: "Мои турниры",
     href: PATHS.tournaments,
     icon: "list",
@@ -23,14 +23,14 @@ export const navItems = [
     roles: [ROLE.USER],
   },
   {
-    key: "account",
+    key: "аккаунт",
     title: "Аккаунт",
     href: PATHS.account,
     icon: "user",
     roles: [],
   },
   {
-    key: "error",
+    key: "ошибка",
     title: "Error",
     href: PATHS.errors.notFound,
     icon: "x-square",

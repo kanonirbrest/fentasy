@@ -19,6 +19,7 @@ export function TableComponent({
     return false;
   },
 }) {
+  console.log(config, "config");
   return (
     <Card>
       <Box sx={{ overflowX: "auto" }}>

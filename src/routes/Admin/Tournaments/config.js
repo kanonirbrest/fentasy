@@ -51,9 +51,9 @@ export const TABLE_CONFIG = [
     },
   },
   {
-    label: "Стартовал?",
-    field: "isActive",
-    id: "isActive",
+    label: "Действия",
+    field: "actions",
+    id: "actions",
     filter: (row, actionCallback) => {
       return (
         <>

@@ -37,7 +37,7 @@ export default function Tournaments() {
               variant="contained"
               onClick={onAdd}
             >
-              Добавить
+              Добавить турнир
             </Button>
           </div>
         </Stack>
@@ -56,6 +56,7 @@ export default function Tournaments() {
             navigate(`${PATHS.admin.tournaments}/${row?.id}`);
           }
         }}
+        keyField="id"
       />
     </Stack>
   );
