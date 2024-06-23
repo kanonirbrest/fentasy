@@ -13,6 +13,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { Eye as EyeIcon } from "@phosphor-icons/react/dist/ssr/Eye";
 import { EyeSlash as EyeSlashIcon } from "@phosphor-icons/react/dist/ssr/EyeSlash";
+import { GoogleLogin } from "@react-oauth/google";
 import { z as zod } from "zod";
 
 import { useUser } from "@/hooks/use-user.js";
@@ -142,6 +143,14 @@ export function SignInForm() {
           </Button>
         </Stack>
       </form>
+      <GoogleLogin
+        onSuccess={(credentialResponse) => {
+          console.log(credentialResponse);
+        }}
+        onError={() => {
+          console.log("Login Failed");
+        }}
+      />
     </Stack>
   );
 }

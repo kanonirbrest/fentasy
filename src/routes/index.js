@@ -11,7 +11,11 @@ import { SignUpForm } from "@/components/auth/sign-up-form.js";
 import { UserProvider } from "@/contexts/user-context.js";
 import { AuthLayout } from "@/layouts/auth-layout.js";
 import { Layout } from "@/layouts/dashboard-layout.js";
-import { getTournamentById } from "@/molules/tournament/api.js";
+import {
+  getTournamentById,
+  getTournamentLeaderboard,
+  getTournamentTable,
+} from "@/molules/tournament/api.js";
 import Account from "@/routes/Account/index.js";
 import { TournamentAdd } from "@/routes/Admin/Tournaments/Add/index.js";
 import NotFound from "@/routes/NotFound/index.js";
@@ -74,11 +78,18 @@ export default function RoutesView() {
             path={PATHS.tournament}
             loader={async ({ request }) => {
               const id = new URL(request.url).pathname.split("/").pop();
+
               try {
                 if (id) {
-                  // eslint-disable-next-line testing-library/no-await-sync-queries
-                  const response = await getTournamentById(id);
-                  return response?.data;
+                  const tournament = await getTournamentById(id);
+                  const leaderboard = await getTournamentLeaderboard(id);
+                  const table = await getTournamentTable(id);
+
+                  return {
+                    tournament: tournament?.data,
+                    leaderboard: leaderboard?.data,
+                    table: table?.data,
+                  };
                 }
               } catch (e) {
                 return null;

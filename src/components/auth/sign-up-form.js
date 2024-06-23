@@ -13,6 +13,7 @@ import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import { useGoogleLogin } from "@react-oauth/google";
 import { z as zod } from "zod";
 
 import { useUser } from "@/hooks/use-user.js";
@@ -41,7 +42,10 @@ const defaultValues = {
 
 export function SignUpForm() {
   const navigate = useNavigate();
-
+  const login = useGoogleLogin({
+    onSuccess: (codeResponse) => console.log(codeResponse),
+    flow: "auth-code",
+  });
   const { checkSession } = useUser();
 
   const [isPending, setIsPending] = React.useState(false);
@@ -170,6 +174,7 @@ export function SignUpForm() {
           <Button disabled={isPending} type="submit" variant="contained">
             Sign up
           </Button>
+          <Button onClick={() => login()}>Sign in with Google 🚀</Button>
         </Stack>
       </form>
       <Alert color="warning">Created users are not persisted</Alert>

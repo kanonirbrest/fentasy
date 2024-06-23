@@ -11,6 +11,7 @@ export const PATHS = {
     tournament: "/admin/tournaments/:id",
   },
   tournaments: "/tournaments",
+  results: "/results",
   tournament: "/tournaments/:id",
   teams: "/teams",
   team: "/teams/:id",

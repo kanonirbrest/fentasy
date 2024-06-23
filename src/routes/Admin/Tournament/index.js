@@ -15,7 +15,7 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
-import { setGameResult } from "@/molules/tournament/api.js";
+import { calculateResult, setGameResult } from "@/molules/tournament/api.js";
 import PlayerRow from "@/routes/Admin/Tournament/row.js";
 import {
   GAME_RESULT,
@@ -94,6 +94,15 @@ export default function AdminTournament() {
   return (
     <Stack spacing={3}>
       Результаты игры
+      <Button
+        type="button"
+        onClick={() => {
+          calculateResult(tournament?.id);
+        }}
+        variant="contained"
+      >
+        опубликовать результаты
+      </Button>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={2}>
           <Controller

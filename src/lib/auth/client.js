@@ -13,7 +13,7 @@ const user = {
   firstName: "Sofia",
   lastName: "Rivers",
   email: "sofia@devias.io",
-  role: ROLE.ADMIN,
+  role: ROLE.USER,
 };
 
 class AuthClient {

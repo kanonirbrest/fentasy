@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { Plus as PlusIcon } from "@phosphor-icons/react/dist/ssr/Plus";
 
+import TablePage from "@/components/customTable/view/view.js";
 import { TableComponent } from "@/components/table/table.js";
 import { useUser } from "@/hooks/use-user.js";
 import { useTournaments } from "@/molules/tournaments/store.js";

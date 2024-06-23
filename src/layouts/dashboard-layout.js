@@ -42,8 +42,8 @@ export function Layout() {
           }}
         >
           <MainNav />
-          <main>
-            <Container maxWidth="xl" sx={{ py: "64px" }}>
+          <main style={{ overflow: "auto", height: "calc(100vh - 64px)" }}>
+            <Container maxWidth="xl" sx={{ py: "10px" }}>
               <Outlet />
             </Container>
           </main>
