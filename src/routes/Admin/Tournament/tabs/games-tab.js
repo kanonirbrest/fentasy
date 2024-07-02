@@ -3,25 +3,25 @@ import Stack from "@mui/material/Stack";
 
 import { TableComponent } from "@/components/table/table.js";
 
-import { TABLE_CONFIG } from "./util.js";
+import { TABLE_CONFIG } from "./games-config.js";
 const page = 1;
 const rowsPerPage = 1;
-export default function ResultTab() {
-  const { leaderboard = [] } = useLoaderData();
+export default function GamesTab() {
+  const { games = [], tournament } = useLoaderData();
   const navigate = useNavigate();
-
-  const records = leaderboard?.records || [];
 
   return (
     <Stack>
       <TableComponent
-        count={records?.length}
+        count={games?.length}
         page={page}
-        rows={records}
+        rows={games}
         rowsPerPage={rowsPerPage}
         config={TABLE_CONFIG}
         onRowClick={(row) => {
-          navigate(`/team/${row?.teamId}`);
+          navigate(
+            `/admin/tournaments/${tournament?.id}/games/${row?.gameNumber}`,
+          );
         }}
         keyField="teamId"
       />

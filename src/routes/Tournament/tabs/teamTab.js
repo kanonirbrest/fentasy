@@ -30,7 +30,7 @@ const rowsPerPage = 1;
 export default function TeamTab() {
   const { tournament } = useLoaderData();
   const navigate = useNavigate();
-  console.log(tournament, "tournament");
+
   const [
     squad,
     balance,

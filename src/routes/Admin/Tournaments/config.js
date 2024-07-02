@@ -47,7 +47,7 @@ export const TABLE_CONFIG = [
     field: "isActive",
     id: "isActive",
     filter: (row) => {
-      return row.isActive.toString();
+      return row.isActive ? "Да" : "Нет";
     },
   },
   {

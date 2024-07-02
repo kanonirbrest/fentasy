@@ -2,13 +2,7 @@ import axios from "axios";
 
 import { AXIOS_TIMEOUT } from "@/api/constant.js";
 import { authClient } from "@/lib/auth/client.js";
-import { login } from "@/molules/auth/api.js";
 import { getToken, TOKEN_TYPE } from "@/utils/auth.js";
-// import { _useAuth } from "@/modules/Auth/stores/auth-store.js";
-// import { useSnackBar } from "@/modules/SnackBar/store/index.js";
-// import { getToken, TOKEN_TYPE } from "@/utils/auth.js";
-// import { ERROR_CODES, RESPONSE_STATUSES } from "@/utils/constant.js";
-// import { ROUTES } from "@/utils/routes.js";
 
 const axiosInstance = axios.create({
   baseURL: "https://mafia-fantasy-dev-5ca0d27a9bff.herokuapp.com/api",
@@ -35,7 +29,7 @@ axiosInstance.interceptors.response.use(
   },
   async (error) => {
     console.log(error);
-    if (error.response.status === 401) {
+    if (error?.response?.status === 401) {
       await authClient.signOut();
     }
 

@@ -6,6 +6,10 @@ export const GAME_RESULT = {
   RED: "RedWin",
   BLACK: "BlackWin",
 };
+export const GAME_RESULT_LABELS = {
+  [GAME_RESULT.RED]: "Победа мирных",
+  [GAME_RESULT.BLACK]: "Победа мафии",
+};
 
 export const GAME_ROLES = {
   CITIZEN: "Citizen",

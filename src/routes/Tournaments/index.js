@@ -13,7 +13,7 @@ import { PATHS } from "@/utils/paths.js";
 
 export default function Tournaments() {
   const page = 0;
-  const rowsPerPage = 5;
+  const rowsPerPage = 10;
   const [tournaments, fetch] = useTournaments((state) => [
     state.list,
     state.fetch,

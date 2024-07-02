@@ -13,9 +13,10 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { Eye as EyeIcon } from "@phosphor-icons/react/dist/ssr/Eye";
 import { EyeSlash as EyeSlashIcon } from "@phosphor-icons/react/dist/ssr/EyeSlash";
-import { GoogleLogin } from "@react-oauth/google";
+import { useGoogleLogin } from "@react-oauth/google";
 import { z as zod } from "zod";
 
+import Google from "@/assets/google.svg?react";
 import { useUser } from "@/hooks/use-user.js";
 import { authClient } from "@/lib/auth/client.js";
 import { PATHS } from "@/utils/paths.js";
@@ -63,6 +64,15 @@ export function SignInForm() {
     },
     [checkSession, navigate, setError],
   );
+
+  const login = useGoogleLogin({
+    onSuccess: (credentialResponse) => {
+      console.log(credentialResponse);
+    },
+    onError: () => {
+      console.log("Login Failed");
+    },
+  });
 
   return (
     <Stack spacing={4}>
@@ -141,16 +151,22 @@ export function SignInForm() {
           <Button disabled={isPending} type="submit" variant="contained">
             Вход
           </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => login()}
+            startIcon={<Google />}
+          >
+            Sign in with Google
+          </Button>
         </Stack>
       </form>
-      <GoogleLogin
-        onSuccess={(credentialResponse) => {
-          console.log(credentialResponse);
-        }}
-        onError={() => {
-          console.log("Login Failed");
-        }}
-      />
+      <Stack
+        display="flex"
+        // style={{ background: "white" }}
+        justifyContent="center"
+        alignItems="center"
+      ></Stack>
     </Stack>
   );
 }

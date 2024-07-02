@@ -6,25 +6,10 @@ import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import Typography from "@mui/material/Typography";
 
+import { CustomTabPanel } from "@/components/CustomTab/index.js";
 import DetailTab from "@/routes/Tournament/tabs/detailTab.js";
 import ResultTab from "@/routes/Tournament/tabs/resultTab.js";
 import TeamTab from "@/routes/Tournament/tabs/teamTab.js";
-
-function CustomTabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
-    </div>
-  );
-}
 
 function a11yProps(index) {
   return {
