@@ -1,6 +1,8 @@
 import { alpha, styled } from "@mui/material/styles";
 import SimpleBar from "simplebar-react";
 
+// ----------------------------------------------------------------------
+
 export const StyledRootScrollbar = styled("div")(() => ({
   flexGrow: 1,
   height: "100%",
