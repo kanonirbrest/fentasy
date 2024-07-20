@@ -7,10 +7,9 @@ import Tabs from "@mui/material/Tabs";
 import Typography from "@mui/material/Typography";
 
 import { CustomTabPanel } from "@/components/CustomTab/index.js";
+import Iconify from "@/components/iconify/index.js";
 import AddGameTab from "@/routes/Admin/Tournament/tabs/add-game-tab.js";
 import GamesTab from "@/routes/Admin/Tournament/tabs/games-tab.js";
-
-import Iconify from "../../../../nested/components/iconify/index.js";
 
 function a11yProps(index) {
   return {

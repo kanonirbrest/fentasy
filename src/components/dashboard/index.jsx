@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Box from "@mui/material/Box";
-import PropTypes from "prop-types";
 
 import Header from "./header.jsx";
 import Main from "./main.jsx";
@@ -29,7 +28,3 @@ export default function DashboardLayout({ children }) {
     </>
   );
 }
-
-DashboardLayout.propTypes = {
-  children: PropTypes.node,
-};

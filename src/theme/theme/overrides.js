@@ -95,7 +95,19 @@ export function overrides(theme) {
       styleOverrides: {
         root: {
           [`& .${outlinedInputClasses.notchedOutline}`]: {
-            borderColor: alpha(theme.palette.grey[500], 0.24),
+            // borderColor: "#ff5722",
+          },
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#ff5722", // Use secondary color for focused border
+          },
+        },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          "&.Mui-focused": {
+            color: "#ff5722", // Change this to your desired focused label color
           },
         },
       },
@@ -110,6 +122,20 @@ export function overrides(theme) {
         head: {
           color: theme.palette.text.secondary,
           backgroundColor: theme.palette.background.neutral,
+        },
+      },
+    },
+    MuiTableRow: {
+      styleOverrides: {
+        root: {
+          "&:hover > td": {
+            color: "black !important",
+          },
+          "&:hover": {
+            backgroundColor: "white !important",
+            color: "black !important",
+            opacity: ".7 !important",
+          },
         },
       },
     },
@@ -137,6 +163,23 @@ export function overrides(theme) {
       styleOverrides: {
         root: {
           ...theme.typography.body2,
+        },
+      },
+    },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          "&.Mui-selected": {
+            color: "#ff5722", // Custom color for the selected tab
+            fontWeight: "bold", // Custom font weight for the selected tab
+          },
+        },
+      },
+    },
+    MuiTabs: {
+      styleOverrides: {
+        indicator: {
+          backgroundColor: "#ff5722", // Custom color for the indicator
         },
       },
     },

@@ -8,7 +8,7 @@ import { TABLE_CONFIG } from "@/routes/Tournament/tabs/table-configs/details-con
 const page = 1;
 const rowsPerPage = 1;
 export default function DetailTab() {
-  const { table, tournament } = useLoaderData();
+  const { table } = useLoaderData();
 
   const records = table?.records;
 

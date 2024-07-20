@@ -3,6 +3,7 @@ export const TABLE_CONFIG = [
     label: "Место",
     field: "rank",
     id: "rank",
+    width: "5%",
   },
   {
     label: "Команда",

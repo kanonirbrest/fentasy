@@ -6,11 +6,7 @@ export const TABLE_CONFIG = [
     label: "Место",
     field: "place",
     id: "place",
-  },
-  {
-    label: "Игр",
-    field: "games",
-    id: "games",
+    width: "5%",
   },
   {
     label: "Name",

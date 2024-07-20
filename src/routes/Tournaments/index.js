@@ -4,10 +4,9 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { Plus as PlusIcon } from "@phosphor-icons/react/dist/ssr/Plus";
 
-import { TableComponent } from "@/components/table/table.js";
 import { useUser } from "@/hooks/use-user.js";
 import { useTournaments } from "@/molules/tournaments/store.js";
-import { TABLE_CONFIG } from "@/routes/Tournaments/config.js";
+import Slider from "@/routes/Tournaments/Slider/index.js";
 import { ROLE } from "@/utils/constant.js";
 import { PATHS } from "@/utils/paths.js";
 
@@ -28,7 +27,15 @@ export default function Tournaments() {
     navigate(PATHS.admin.tournamentAdd);
   };
   return (
-    <Stack spacing={3}>
+    <Stack
+      spacing={3}
+      style={{
+        display: "flex",
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       {user?.role === ROLE.ADMIN && (
         <Stack direction="row" spacing={3}>
           <div>
@@ -42,17 +49,7 @@ export default function Tournaments() {
           </div>
         </Stack>
       )}
-      <TableComponent
-        count={paginatedList.length}
-        page={page}
-        rows={paginatedList}
-        rowsPerPage={rowsPerPage}
-        config={TABLE_CONFIG}
-        onRowClick={(row) => {
-          navigate(`${PATHS.tournaments}/${row?.id}`);
-        }}
-        keyField="id"
-      />
+      {!!paginatedList?.length && <Slider list={paginatedList} />}
     </Stack>
   );
 }

@@ -26,7 +26,11 @@ export function TableComponent({
           <TableHead>
             <TableRow>
               {config.map((c) => {
-                return <TableCell key={c.id}>{c.label}</TableCell>;
+                return (
+                  <TableCell width={c?.width} key={c.id}>
+                    {c.label}
+                  </TableCell>
+                );
               })}
             </TableRow>
           </TableHead>

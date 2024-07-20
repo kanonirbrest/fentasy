@@ -4,18 +4,14 @@ import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import { useTheme } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
-import PropTypes from "prop-types";
-import Iconify from "src/components/iconify";
 
+import Iconify from "@/components/iconify/index.js";
 import { useResponsive } from "@/hooks/use-responsive.js";
+import { bgBlur } from "@/theme/theme/css.js";
 
 import AccountPopover from "./common/account-popover.jsx";
 import Searchbar from "./common/searchbar.jsx";
 import { HEADER, NAV } from "./config-layout.js";
-
-import { bgBlur } from "src/theme/css";
-
-// ----------------------------------------------------------------------
 
 export default function Header({ onOpenNav }) {
   const theme = useTheme();
@@ -69,7 +65,3 @@ export default function Header({ onOpenNav }) {
     </AppBar>
   );
 }
-
-Header.propTypes = {
-  onOpenNav: PropTypes.func,
-};

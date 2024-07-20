@@ -60,7 +60,6 @@ export default function Nav({ openNav, onCloseNav }) {
     <Stack component="nav" spacing={0.5} sx={{ px: 2 }}>
       {navConfig
         .filter((item) => {
-          console.log(item?.roles, user?.role);
           return item?.roles.includes(user?.role);
         })
         .map((item) => (

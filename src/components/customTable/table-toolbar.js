@@ -5,7 +5,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 
-import Iconify from "@/nested/components/iconify/index.js";
+import Iconify from "@/components/iconify/index.js";
 
 export default function TableToolbar({
   numSelected,

@@ -15,10 +15,9 @@ import Popover from "@mui/material/Popover";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { set, sub } from "date-fns";
-import PropTypes from "prop-types";
-import Iconify from "src/components/iconify";
 import { fToNow } from "src/utils/format-time";
 
+import Iconify from "@/components/iconify/index.js";
 import Scrollbar from "@/components/scrollbar/index.js";
 
 // ----------------------------------------------------------------------
@@ -191,18 +190,6 @@ export default function NotificationsPopover() {
 }
 
 // ----------------------------------------------------------------------
-
-NotificationItem.propTypes = {
-  notification: PropTypes.shape({
-    createdAt: PropTypes.instanceOf(Date),
-    id: PropTypes.string,
-    isUnRead: PropTypes.bool,
-    title: PropTypes.string,
-    description: PropTypes.string,
-    type: PropTypes.string,
-    avatar: PropTypes.any,
-  }),
-};
 
 function NotificationItem({ notification }) {
   const { avatar, title } = renderContent(notification);

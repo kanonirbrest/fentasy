@@ -37,3 +37,9 @@ export const navItems = [
     roles: [],
   },
 ];
+
+export const ROUTE_LABELS = {
+  tournaments: "Мои турниры",
+  teams: "Мои команды",
+  account: "Аккаунт",
+};

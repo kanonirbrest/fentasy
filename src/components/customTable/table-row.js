@@ -9,7 +9,7 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 
-import Iconify from "@/nested/components/iconify/index.js";
+import Iconify from "@/components/iconify/index.js";
 
 // import Label from 'src/components/label';
 const Label = () => {

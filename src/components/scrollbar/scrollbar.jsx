@@ -1,6 +1,5 @@
 import { forwardRef, memo } from "react";
 import Box from "@mui/material/Box";
-import PropTypes from "prop-types";
 
 import { StyledRootScrollbar, StyledScrollbar } from "./styles";
 
@@ -39,10 +38,5 @@ const Scrollbar = forwardRef(({ children, sx, ...other }, ref) => {
     </StyledRootScrollbar>
   );
 });
-
-Scrollbar.propTypes = {
-  children: PropTypes.node,
-  sx: PropTypes.object,
-};
 
 export default memo(Scrollbar);

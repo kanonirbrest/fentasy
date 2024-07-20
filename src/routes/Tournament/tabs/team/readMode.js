@@ -27,7 +27,7 @@ import classes from "./../tournament.module.scss";
 const page = 1;
 const rowsPerPage = 1;
 
-export default function TeamTab() {
+export default function ReadMode() {
   const { tournament } = useLoaderData();
   const navigate = useNavigate();
 

@@ -5,15 +5,13 @@ import Stack from "@mui/material/Stack";
 import { useTheme } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 
+import Breadcrumbs from "@/components/crumbs/index.js";
+import Iconify from "@/components/iconify/index.js";
 import { useResponsive } from "@/hooks/use-responsive.js";
 import { bgBlur } from "@/theme/theme/css.js";
 
-import Iconify from "../../../nested/components/iconify/index.js";
-
 import AccountPopover from "./common/account-popover";
 import { HEADER, NAV } from "./config-layout";
-
-// ----------------------------------------------------------------------
 
 export default function Header({ onOpenNav }) {
   const theme = useTheme();
@@ -24,11 +22,10 @@ export default function Header({ onOpenNav }) {
     <>
       {!lgUp && (
         <IconButton onClick={onOpenNav} sx={{ mr: 1 }}>
-          <Iconify icon="eva:menu-2-fill" />\{" "}
+          <Iconify icon="eva:menu-2-fill" />
         </IconButton>
       )}
-
-      {/*<Searchbar />*/}
+      <Breadcrumbs />
 
       <Box sx={{ flexGrow: 1 }} />
 

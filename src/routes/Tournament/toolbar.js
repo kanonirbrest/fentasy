@@ -4,8 +4,8 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
-import PropTypes from "prop-types";
-import Iconify from "src/components/iconify";
+
+import Iconify from "@/components/iconify/index.js";
 
 // ----------------------------------------------------------------------
 
@@ -63,9 +63,3 @@ export default function UserTableToolbar({
     </Toolbar>
   );
 }
-
-UserTableToolbar.propTypes = {
-  numSelected: PropTypes.number,
-  filterName: PropTypes.string,
-  onFilterName: PropTypes.func,
-};

@@ -7,7 +7,6 @@ import ListItemButton from "@mui/material/ListItemButton";
 import Stack from "@mui/material/Stack";
 import { alpha } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import PropTypes from "prop-types";
 import { account } from "src/_mock/account";
 import Logo from "src/components/logo";
 import { RouterLink } from "src/routes/components";
@@ -154,12 +153,6 @@ export default function Nav({ openNav, onCloseNav }) {
     </Box>
   );
 }
-
-Nav.propTypes = {
-  openNav: PropTypes.bool,
-  onCloseNav: PropTypes.func,
-};
-
 // ----------------------------------------------------------------------
 
 function NavItem({ item }) {
