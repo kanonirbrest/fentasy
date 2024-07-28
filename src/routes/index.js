@@ -1,3 +1,4 @@
+import React from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -8,6 +9,7 @@ import {
 
 import { SignInForm } from "@/components/auth/sign-in-form.js";
 import { SignUpForm } from "@/components/auth/sign-up-form.js";
+import { BreadCrumbsContext } from "@/contexts/bread-crumbs-context.js";
 import { UserProvider } from "@/contexts/user-context.js";
 import { AuthLayout } from "@/layouts/auth-layout.js";
 import { Layout } from "@/layouts/dashboard-layout.js";
@@ -34,6 +36,8 @@ import Tournament from "./Tournament/index.js";
 import UserTournaments from "./Tournaments/index.js";
 
 export default function RoutesView() {
+  const { setData } = React.useContext(BreadCrumbsContext);
+
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
@@ -71,25 +75,26 @@ export default function RoutesView() {
                 return null;
               }}
             />
-          </Route>
-          <Route
-            path={PATHS.admin.game}
-            element={<Game />}
-            loader={async ({ request }) => {
-              const { tournamentId, gameId } = extractIdsFromUrl(
-                new URL(request.url).pathname,
-              );
+            <Route
+              path={PATHS.admin.game}
+              element={<Game />}
+              loader={async ({ request }) => {
+                const { tournamentId, gameId } = extractIdsFromUrl(
+                  new URL(request.url).pathname,
+                );
 
-              try {
-                if (gameId && tournamentId) {
-                  return await getGameById(tournamentId, gameId);
+                try {
+                  if (gameId && tournamentId) {
+                    return await getGameById(tournamentId, gameId);
+                  }
+                } catch (e) {
+                  return null;
                 }
-              } catch (e) {
                 return null;
-              }
-              return null;
-            }}
-          />
+              }}
+            />
+          </Route>
+
           <Route
             path={PATHS.tournaments}
             element={<UserTournaments />}
@@ -110,6 +115,7 @@ export default function RoutesView() {
                 if (id) {
                   // eslint-disable-next-line testing-library/no-await-sync-queries
                   const response = await getTeamDetailsById(id);
+                  setData(response?.data?.name);
                   return response?.data;
                 }
               } catch (e) {
@@ -128,6 +134,7 @@ export default function RoutesView() {
                   const tournament = await getTournamentById(id);
                   const leaderboard = await getTournamentLeaderboard(id);
                   const table = await getTournamentTable(id);
+                  setData(tournament?.data?.name);
 
                   return {
                     tournament: tournament?.data,

@@ -107,10 +107,10 @@ export function TournamentAdd() {
                 name="teamMembersCount"
                 render={({ field }) => (
                   <FormControl error={Boolean(errors.teamMembersCount)}>
-                    <InputLabel>Всего игроков</InputLabel>
+                    <InputLabel>Всего игроков в команде</InputLabel>
                     <OutlinedInput
                       {...field}
-                      label="Всего игроков"
+                      label="Всего игроков в команде"
                       type="number"
                     />
                     {errors.teamMembersCount ? (

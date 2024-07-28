@@ -9,6 +9,7 @@ const rowsPerPage = 5;
 
 export default function Team() {
   const data = useLoaderData();
+
   const tableConfig = [
     {
       label: "Никнейм",

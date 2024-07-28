@@ -9,7 +9,6 @@ import { customShadows } from "./custom-shadows";
 import { overrides } from "./overrides";
 import { palette } from "./palette";
 import { shadows } from "./shadows";
-import { typography } from "./typography";
 
 // ----------------------------------------------------------------------
 
@@ -17,7 +16,9 @@ export default function ThemeProvider({ children }) {
   const memoizedValue = useMemo(
     () => ({
       palette: palette(),
-      typography,
+      typography: {
+        fontFamily: "Rubik Bubbles, sans-serif",
+      },
       shadows: shadows(),
       customShadows: customShadows(),
       shape: { borderRadius: 8 },

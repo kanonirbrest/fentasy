@@ -11,13 +11,11 @@ import { ROLE } from "@/utils/constant.js";
 import { PATHS } from "@/utils/paths.js";
 
 export default function Tournaments() {
-  const page = 0;
-  const rowsPerPage = 10;
   const [tournaments, fetch] = useTournaments((state) => [
     state.list,
     state.fetch,
   ]);
-  const paginatedList = applyPagination(tournaments, page, rowsPerPage);
+  const list = tournaments;
   const navigate = useNavigate();
   const { user } = useUser();
   React.useEffect(() => {
@@ -49,11 +47,7 @@ export default function Tournaments() {
           </div>
         </Stack>
       )}
-      {!!paginatedList?.length && <Slider list={paginatedList} />}
+      {!!list?.length && <Slider list={list} />}
     </Stack>
   );
-}
-
-function applyPagination(rows, page, rowsPerPage) {
-  return rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 }

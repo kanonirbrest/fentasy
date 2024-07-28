@@ -41,3 +41,16 @@ export const TABLE_CONFIG = [
     },
   },
 ];
+
+export const ensureMinimumLength = (arr, minLength) => {
+  if (arr.length >= minLength) {
+    return arr;
+  }
+
+  const result = [...arr];
+  while (result.length < minLength) {
+    result.push(...arr);
+  }
+
+  return result.slice(0, minLength);
+};

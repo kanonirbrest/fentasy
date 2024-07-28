@@ -26,7 +26,6 @@ export function UserProvider({ children }) {
         }));
         return;
       }
-
       setState((prev) => ({
         ...prev,
         user: data ?? null,

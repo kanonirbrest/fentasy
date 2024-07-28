@@ -14,20 +14,14 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
 
-import { Filter } from "@/components/filter/filter.js";
-import { PlayerCard } from "@/components/player-card/index.js";
-import { TableComponent } from "@/components/table/table.js";
 import { createTeam, updateTeam } from "@/molules/teams/api.js";
 import { useTournament } from "@/molules/tournament/store.js";
-import { TABLE_CONFIG } from "@/routes/Tournament/tabs/table-configs/teams-config.js";
+import classes from "@/routes/Tournament/tournament.module.scss";
 import { PATHS } from "@/utils/paths.js";
 
-import classes from "./../tournament.module.scss";
+import PlayerCardItem from "./Card/index.js";
 
-const page = 1;
-const rowsPerPage = 1;
-
-export default function ReadMode() {
+export default function CreateTournament() {
   const { tournament } = useLoaderData();
   const navigate = useNavigate();
 
@@ -35,8 +29,6 @@ export default function ReadMode() {
     squad,
     balance,
     players,
-    filter,
-    setFilter,
     setBalance,
     setPlayers,
     setSquad,
@@ -47,8 +39,6 @@ export default function ReadMode() {
     state.squad,
     state.balance,
     state.players,
-    state.filter,
-    state.setFilter,
     state.setBalance,
     state.setPlayers,
     state.setSquad,
@@ -105,24 +95,18 @@ export default function ReadMode() {
 
     navigate(PATHS.teams);
   };
-  const isEditMode = !!tournament?.team?.id;
-  const hasCaptain = squad?.find((s) => s?.isCaptain);
+  const hasCaptain = !!squad?.find((s) => !!s?.isCaptain);
 
   const isValid =
     hasCaptain &&
     !!name &&
     squad?.length === tournament?.teamMembersCount &&
-    balance >= 0 &&
-    (isEditMode ? tournament?.team?.id : true);
+    balance >= 0;
+  // && (isEditMode ? tournament?.team?.id : true);
+
   return (
     <Stack spacing={3}>
       <Stack direction="row" spacing={3}>
-        <Stack spacing={0.5}>
-          <Typography variant="h4">Место: {tournament?.team?.rank}</Typography>
-          <Typography variant="subtitle2" sx={{ color: "text.disabled" }}>
-            Баллы: {tournament?.team?.score}
-          </Typography>
-        </Stack>
         <Stack spacing={1} sx={{ flex: "1 1 auto" }}>
           <Card sx={{ p: 2 }}>
             <FormControl fullWidth required>
@@ -140,15 +124,19 @@ export default function ReadMode() {
         </Stack>
       </Stack>
       <Grid container spacing={2} className={classes.container}>
-        <Grid lg={8} sm={6} xs={12}>
+        <Grid lg={12} sm={12} xs={12}>
           <Card>
             <CardHeader
               subheader={
-                <Stack spacing={1}>
-                  <Typography color="text.secondary" variant="body2">
+                <Stack
+                  spacing={1}
+                  direction="row"
+                  justifyContent="space-between"
+                >
+                  <Typography color="text.secondary" variant="h5">
                     {`Баланс: ${balance}`}
                   </Typography>
-                  <Typography color="text.secondary" variant="body2">
+                  <Typography color="text.secondary" variant="h5">
                     {`Количество игроков: ${squad?.length}/${tournament?.teamMembersCount}`}
                   </Typography>
                 </Stack>
@@ -159,9 +147,33 @@ export default function ReadMode() {
               <Grid container spacing={2} wrap="wrap">
                 {squad.map((p) => {
                   return (
-                    <PlayerCard
+                    <PlayerCardItem
+                      isGridView={false}
                       key={p.nickname}
-                      player={{ ...p, price: priceMap[p?.nickname] }}
+                      player={p}
+                      balance={balance}
+                      onRemove={(row) => {
+                        setBalance(+balance + +row?.price);
+                        setSquad(
+                          squad.filter((s) => s?.nickname !== row?.nickname),
+                        );
+                      }}
+                      onCaptain={(row) => {
+                        setSquad(
+                          squad.map((s) => {
+                            if (s.nickname === row?.nickname) {
+                              return {
+                                ...s,
+                                isCaptain: true,
+                              };
+                            }
+                            return {
+                              ...s,
+                              isCaptain: false,
+                            };
+                          }),
+                        );
+                      }}
                     />
                   );
                 })}
@@ -186,40 +198,31 @@ export default function ReadMode() {
             </CardActions>
           </Card>
         </Grid>
-        <Grid lg={4} sm={6} xs={12}>
-          <Stack spacing={3}>
-            <Filter
-              placeholder="Искать игрока"
-              value={filter}
-              onChange={(e) => {
-                setFilter(e.target.value);
-              }}
-            />
-            <TableComponent
-              count={players?.length}
-              page={page}
-              keyField="nickname"
-              rows={players
-                .filter((p) => {
-                  return !squadIds.includes(p?.nickname);
-                })
-                .filter((p) =>
-                  p.nickname.toLowerCase().includes(filter.toLowerCase()),
-                )}
-              isRowDisabled={(row) => {
-                return (
-                  priceMap[row?.nickname] > balance ||
-                  squad?.length >= tournament?.teamMembersCount
-                );
-              }}
-              rowsPerPage={rowsPerPage}
-              onRowClick={(row) => {
-                setSquad([...squad, row]);
-                setBalance(balance - priceMap[row?.nickname]);
-              }}
-              config={TABLE_CONFIG}
-            />
-          </Stack>
+        <Grid container={true} spacing={2}>
+          {players
+            .filter((p) => {
+              return !squadIds.includes(p?.nickname);
+            })
+            .map((p, index) => {
+              return (
+                <PlayerCardItem
+                  isShowPrice={true}
+                  isDisabled={
+                    priceMap[p?.nickname] > balance ||
+                    squad?.length >= tournament?.teamMembersCount
+                  }
+                  isGridView={true}
+                  onAdd={(row) => {
+                    setSquad([...squad, row]);
+                    setBalance(balance - priceMap[row?.nickname]);
+                  }}
+                  onRemove={() => {}}
+                  nickname={p?.nickname}
+                  key={index}
+                  player={p}
+                />
+              );
+            })}
         </Grid>
       </Grid>
     </Stack>

@@ -5,6 +5,7 @@ import Carousel from "react-spring-3d-carousel";
 import antikvar1 from "@/assets/images/antikvar1.jpeg";
 import antikvar2 from "@/assets/images/antikvar2.jpeg";
 import antikvar3 from "@/assets/images/antikvar3.webp";
+import { ensureMinimumLength } from "@/routes/Tournaments/config.js";
 import Slide from "@/routes/Tournaments/Slider/Slide/index.js";
 
 const images = [
@@ -17,25 +18,29 @@ const images = [
   antikvar2,
   antikvar1,
 ];
-function Slider({ list }) {
+function Slider({ list: arr }) {
   const [goToSlide, setGoToSlide] = React.useState(null);
-  const items = list.map(({ isActive, name, startDate, id }, index) => {
-    return {
-      key: index,
-      id,
-      content: (
-        <Slide
-          src={images[index]}
-          isActive={isActive}
-          name={name}
-          startDate={startDate}
-          id={id}
-        />
-      ),
-    };
-  });
+  const list = ensureMinimumLength(arr, 5);
+  const items = list.map(
+    ({ isActive, name, startDate, endDate, id }, index) => {
+      return {
+        key: index,
+        id,
+        content: (
+          <Slide
+            src={images[index]}
+            isActive={isActive}
+            name={name}
+            startDate={startDate}
+            endDate={endDate}
+            id={id}
+          />
+        ),
+      };
+    },
+  );
 
-  const slideExample = items.map((slide, index) => {
+  const tournaments = items.map((slide, index) => {
     return {
       ...slide,
       onClick: () => {
@@ -43,8 +48,8 @@ function Slider({ list }) {
       },
     };
   });
-  const [slides] = React.useState(slideExample);
-
+  const [slides] = React.useState(tournaments);
+  console.log(slides, "slides");
   return (
     <div style={{ width: "80%", height: "500px", margin: "0 auto" }}>
       <Carousel

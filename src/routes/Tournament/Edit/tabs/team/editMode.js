@@ -15,11 +15,11 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
 
 import { Filter } from "@/components/filter/filter.js";
-import { PlayerCard } from "@/components/player-card/index.js";
 import { TableComponent } from "@/components/table/table.js";
 import { createTeam, updateTeam } from "@/molules/teams/api.js";
 import { useTournament } from "@/molules/tournament/store.js";
-import { TABLE_CONFIG } from "@/routes/Tournament/tabs/table-configs/teams-config.js";
+import PlayerCardItem from "@/routes/Tournament/Create/Card/index.js";
+import { TABLE_CONFIG } from "@/routes/Tournament/Edit/tabs/table-configs/teams-config.js";
 import { PATHS } from "@/utils/paths.js";
 
 import classes from "./../tournament.module.scss";
@@ -158,12 +158,7 @@ export default function EditMode() {
             <CardContent>
               <Grid container spacing={2} wrap="wrap">
                 {squad.map((p) => {
-                  return (
-                    <PlayerCard
-                      key={p.nickname}
-                      player={{ ...p, price: priceMap[p?.nickname] }}
-                    />
-                  );
+                  return <PlayerCardItem key={p.nickname} player={p} />;
                 })}
               </Grid>
             </CardContent>

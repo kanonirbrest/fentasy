@@ -3,7 +3,7 @@ import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Unstable_Grid2";
 
 import { TableComponent } from "@/components/table/table.js";
-import { TABLE_CONFIG } from "@/routes/Tournament/tabs/table-configs/details-config.js";
+import { TABLE_CONFIG } from "@/routes/Tournament/Edit/tabs/table-configs/details-config.js";
 
 const page = 1;
 const rowsPerPage = 1;

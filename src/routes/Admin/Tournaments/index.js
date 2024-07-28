@@ -30,16 +30,15 @@ export default function Tournaments() {
   return (
     <Stack spacing={3}>
       {user?.role === ROLE.ADMIN && (
-        <Stack direction="row" spacing={3}>
-          <div>
-            <Button
-              startIcon={<PlusIcon fontSize="var(--icon-fontSize-md)" />}
-              variant="contained"
-              onClick={onAdd}
-            >
-              Добавить турнир
-            </Button>
-          </div>
+        <Stack direction="row" spacing={3} sx={{ pt: 2 }}>
+          <Button
+            startIcon={<PlusIcon fontSize="var(--icon-fontSize-md)" />}
+            variant="contained"
+            onClick={onAdd}
+            sx={{ mt: 4 }}
+          >
+            Добавить турнир
+          </Button>
         </Stack>
       )}
       <TableComponent

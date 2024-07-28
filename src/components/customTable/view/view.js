@@ -20,7 +20,7 @@ import TableRow from "../table-row.js";
 import TableToolbar from "../table-toolbar.js";
 import { applyFilter, emptyRows, getComparator } from "../utils";
 
-export default function TablePage({ rows = [], label = "users", config }) {
+export default function TablePage({ rows = [], label = "users" }) {
   const [page, setPage] = useState(0);
 
   const [order, setOrder] = useState("asc");
@@ -89,7 +89,7 @@ export default function TablePage({ rows = [], label = "users", config }) {
   });
 
   const notFound = !dataFiltered.length && !!filterName;
-  console.log(config, "config");
+
   return (
     <Container>
       <Stack

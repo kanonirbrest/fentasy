@@ -98,7 +98,7 @@ export function overrides(theme) {
             // borderColor: "#ff5722",
           },
           "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            borderColor: "#ff5722", // Use secondary color for focused border
+            borderColor: "#ff8e22", // Use secondary color for focused border
           },
         },
       },
@@ -107,7 +107,7 @@ export function overrides(theme) {
       styleOverrides: {
         root: {
           "&.Mui-focused": {
-            color: "#ff5722", // Change this to your desired focused label color
+            color: "#ff8e22", // Change this to your desired focused label color
           },
         },
       },
@@ -129,6 +129,9 @@ export function overrides(theme) {
       styleOverrides: {
         root: {
           "&:hover > td": {
+            color: "black !important",
+          },
+          "&:hover > th": {
             color: "black !important",
           },
           "&:hover": {
@@ -170,7 +173,7 @@ export function overrides(theme) {
       styleOverrides: {
         root: {
           "&.Mui-selected": {
-            color: "#ff5722", // Custom color for the selected tab
+            color: "#ff8e22", // Custom color for the selected tab
             fontWeight: "bold", // Custom font weight for the selected tab
           },
         },
@@ -179,7 +182,7 @@ export function overrides(theme) {
     MuiTabs: {
       styleOverrides: {
         indicator: {
-          backgroundColor: "#ff5722", // Custom color for the indicator
+          backgroundColor: "#ff8e22", // Custom color for the indicator
         },
       },
     },

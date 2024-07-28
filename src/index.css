@@ -1,8 +1,9 @@
-
+@import url('https://fonts.googleapis.com/css2?family=YourFontName&display=swap');
 body {
-    background-image: url('./assets/maf_bh.jpeg') !important;
+    background-image: url('./assets/dark_lamp.jpeg') !important;
     background-size: cover;
     background-position: center;
     height: 100vh;
     width: 100vw;
+    font-family: 'Rubik Bubbles', sans-serif;
 }

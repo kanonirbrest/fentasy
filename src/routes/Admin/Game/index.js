@@ -22,7 +22,7 @@ export default function Game() {
   const publish = async () => {
     await calculateResult(tournamentId);
   };
-  console.log(gameInfo, "gameInfo");
+
   return (
     <Grid lg={4} sm={6} xs={12}>
       <Stack spacing={1} sx={{ textAlign: "start" }}>
